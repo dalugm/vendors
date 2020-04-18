@@ -18,3 +18,9 @@ find ./ -regex "<name>" -print -exec rm -fr {};
 ```
 
 其中`{}`是`find`命令查找出来的所有结果
+
+## Compress files (WIP)
+
+```sh
+./compress.sh <path>
+```
