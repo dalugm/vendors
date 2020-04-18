@@ -41,6 +41,6 @@ def change_trackers(text):
 
     file.close()
 
-URL = 'https://ngosang.github.io/trackerslist/trackers_best.txt'
+URL = 'https://ngosang.github.io/trackerslist/trackers_best_ip.txt'
 TEXT = get_html(URL)
 change_trackers(TEXT)
