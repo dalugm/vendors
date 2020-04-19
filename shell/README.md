@@ -22,5 +22,11 @@ find ./ -regex "<name>" -print -exec rm -fr {};
 ## Compress files (WIP)
 
 ```sh
-./compress.sh <path>
+bash compress.sh <path>
 ```
+
+目前存在的问题：
+
+- 只支持`bash`，使用`./`执行时压缩名字中带空格的文件会报错
+
+- 文件部分语法不符合规范
