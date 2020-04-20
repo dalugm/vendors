@@ -7,7 +7,7 @@
 - 第一种做法
 
 ```sh
-find . -name "<name>" -depth -print0 | xargs -0 rm
+find . -depth -name "<name>" -print0 | xargs -0 rm
 find . -name '<name>' -type f -delete
 ```
 
@@ -27,6 +27,6 @@ bash compress.sh <path>
 
 目前存在的问题：
 
-- 只支持`bash`，使用`./`执行时压缩名字中带空格的文件会报错
+- 只支持`bash`(5.0+)，使用`./`（较低版本的`bash`）执行时压缩名字中带空格的文件会报错
 
 - 文件部分语法不符合规范
