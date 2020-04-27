@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+red='\033[31m'
+green='\033[32m'
+yellow='\033[33m'
+none='\033[0m'
+
 path="$1"
 files=$(ls "$path")
 
@@ -19,52 +24,58 @@ pass2clip()
 
 for name in $files
 do
-    printf "\n\033[33m*************************************\033[0m"
-    printf "\n\033[32mNow you are operating\033[0m \033[31m%s\033[0m\n\n" "$name"
+    echo "${yellow}*************************************${none}"
+    printf "${green}Now you are operating${none} ${red}%s${none}\n\n" "$name"
 
     name=${name// /\\ }
 
-    printf "\033[32m1. \033[0m\033[31mZip folder/file with password\033[0m\n"
-    printf "\033[32m2. \033[0m\033[31mDecrypted zip file\033[0m\n"
-    printf "\033[32mq. \033[0m\033[31mExit\033[0m\n"
-    printf "\033[33m-------------------------------------\033[0m\n"
-    printf "\033[32m    Press anykey to continue...     \033[0m\n"
-    printf "\033[33m*************************************\033[0m\n"
+    echo "${green}1.${none} ${red}Zip folder/file with password${none}"
+    echo "${green}2.${none} ${red}Decrypted zip file${none}"
+    echo "${green}q.${none} ${red}Exit${none}"
+    echo "${yellow}-------------------------------------${none}"
+    echo "${green}    Press anykey to continue...     ${none}"
+    echo "${yellow}-------------------------------------${none}"
 
     read -r ch
     case $ch in
         1)
-            printf "\033[33m-------------------------------------\033[0m\n"
-            printf "\033[32mDefault pasword:\033[0m \033[31m%s\033[0m\n" "${name%.*}"
-            printf "\033[33m-------------------------------------\033[0m\n"
+            echo "${yellow}-------------------------------------${none}"
+            printf "${green}Default pasword:${none} ${red}%s${none}\n" "${name%.*}"
+            echo "${yellow}-------------------------------------${none}"
             if [ -d $1/${name} ]; then
                 pass2clip
                 eval zip -re "$1/${name%.*}".zip "$1/$name"
-                printf "\033[32mCompress success!\033[0m\n"
+                echo "${green}Compress success!${none}"
+                echo ""
                 continue
             elif [ -f $1/${name} ]; then
                 pass2clip
                 eval zip -e "$1/${name%.*}".zip "$1/$name"
-                printf "\033[32mCompress success!\033[0m\n"
+                echo "${green}Compress success!${none}"
+                echo ""
                 continue
             else
-                printf "\n\033[31m******************************************\033[0m\n"
-                printf "\033[31mSomething wrong happened when compressing.\033[0m\n"
-                printf "\033[31m******************************************\033[0m\n"
+                echo ""
+                echo "${red}******************************************${none}"
+                echo "${red}Something wrong happened when compressing.${none}"
+                echo "${red}******************************************${none}"
+                echo ""
             fi
             ;;
         2)
-            printf "\n\033[33m-------------------------------------\033[0m\n"
-            printf "\033[32mPossible password:\033[0m \033[31m%s\033[0m\n" "${name%.*}"
-            printf "\033[33m-------------------------------------\033[0m\n"
+            echo "${yellow}-------------------------------------${none}"
+            printf "${green}Possible password:${none} ${red}%s${none}\n" "${name%.*}"
+            echo "${yellow}-------------------------------------${none}"
             if [ -f $1/${name} ]; then
                 pass2clip
                 unzip "$1/${name%.*}".zip
                 continue
             else
-                printf "\n\033[31m*****************************************\033[0m\n"
-                printf "\033[31mSomething wrong happened when decrypting.\033[0m\n"
-                printf "\033[31m*****************************************\033[0m\n"
+                echo ""
+                echo "${red}*****************************************${none}"
+                echo "${red}Something wrong happened when decrypting.${none}"
+                echo "${red}*****************************************${none}"
+                echo ""
             fi
             ;;
         q)
