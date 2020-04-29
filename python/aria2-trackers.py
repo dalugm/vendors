@@ -1,6 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import re
 import os
 import requests
+
+'''
+python3 aria2-trackers.py
+'''
 
 def get_html(url):
     """

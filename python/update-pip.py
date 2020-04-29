@@ -1,8 +1,10 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
+
 """
 update pip packages by cli
 """
+
 import pip
 from pip._internal.utils.misc import get_installed_distributions
 from subprocess import call
