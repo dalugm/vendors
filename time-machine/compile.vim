@@ -2,19 +2,21 @@
 " Author: dalu <mou.tong@qq.com>
 " Maintainer: dalu <mou.tong@qq.com>
 " Created: 2020-04-30 13:33
-" Last Upated:
-"          By:
+" Last Upated: 2020-05-03 20:53
+"          By: dalu <mou.tong@qq.com>
 " Keywords: compile
-" Version: 0.1
+" Version: 0.2
 " Changelog:
 "     0.1 - initial version
+"     0.2 - add async version
 " Commentary:
 
-" compile files
+" compile files and run
 
 
 " Code:
 
+" Default version
 function! CompileRun()
     exec "w"
     if &filetype == "c"
@@ -87,3 +89,41 @@ function! CompileGpp()
     endif
     exec compilecmd." % ".compileflag
 endfunc
+
+" Async verison
+function! CompileRun()
+    execute "w"
+    if (&filetype == 'c')
+        execute "AsyncRun gcc % -o %<; time ./%<"
+    endif
+    if (&filetype == 'cpp')
+        execute "AsyncRun g++ % -o %<; time ./%<"
+    endif
+    if (&filetype == 'python')
+        execute "AsyncRun time python3 %"
+    endif
+    if (&filetype == 'php')
+        execute "AsyncRun time php %"
+    endif
+    if (&filetype == 'javascript')
+        execute "AsyncRun time node %"
+    endif
+    if (&filetype == 'java')
+        execute "AsyncRun time javac Main.java; java Main;"
+    endif
+    if (&filetype == 'coffee')
+        execute "AsyncRun time coffee %"
+    endif
+    if (&filetype == 'rust')
+        execute "AsyncRun time rustc %; ./%< ;"
+    endif
+    if (&filetype == 'haskell' || &filetype == 'lhaskell')
+        execute "AsyncRun time ghc %; ./%< ;"
+    endif
+    if (&filetype == 'tex')
+        execute "AsyncRun time pdflatex %;"
+    endif
+    if (&filetype == 'markdown')
+        execute "AsyncRun time pandoc -s -S -o %<.pdf %;"
+    endif
+endfunction

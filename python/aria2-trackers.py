@@ -54,7 +54,7 @@ def change_trackers(text):
 
         file.close()
         print("{0}----------{1}".format(yellow, none))
-        print("{0}aria2 trackers update complete.{1}".format(green, none))
+        print("{0}aria2 trackers updated.{1}".format(green, none))
         print("{0}----------{1}".format(yellow, none))
     except:
         print("{0}----------{1}".format(yellow, none))
