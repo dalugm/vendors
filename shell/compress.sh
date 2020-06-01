@@ -24,58 +24,56 @@ pass2clip()
 
 for name in $files
 do
-    echo "${yellow}*************************************${none}"
-    printf "${green}Now you are operating${none} ${red}%s${none}\n\n" "$name"
+    printf "\n$yellow *************************************$none \n"
+    printf "$green Now you are operating$none  $red %s$none \n\n" "$name"
 
     name=${name// /\\ }
 
-    echo "${green}1.${none} ${red}Zip folder/file with password${none}"
-    echo "${green}2.${none} ${red}Decrypted zip file${none}"
-    echo "${green}q.${none} ${red}Exit${none}"
-    echo "${yellow}-------------------------------------${none}"
-    echo "${green}    Press anykey to continue...     ${none}"
-    echo "${yellow}-------------------------------------${none}"
+    printf "$green 1.$none $red Zip folder/file with password $none\n"
+    printf "$green 2.$none $red Decrypted zip file $none \n"
+    printf "$green q.$none $red Exit$none \n"
+    printf "$yellow -------------------------------------$none \n"
+    printf "$green     Press anykey to continue...     $none \n"
+    printf "$yellow -------------------------------------$none \n"
 
     read -r ch
     case $ch in
         1)
-            echo "${yellow}-------------------------------------${none}"
-            printf "${green}Default pasword:${none} ${red}%s${none}\n" "${name%.*}"
-            echo "${yellow}-------------------------------------${none}"
+            printf "$yellow -------------------------------------$none \n"
+            printf "$green Default pasword:$none  $red %s$none \n" "${name%.*}"
+            printf "$yellow -------------------------------------$none \n"
             if [ -d $1/${name} ]; then
                 pass2clip
                 eval zip -re "$1/${name%.*}".zip "$1/$name"
-                echo "${green}Compress success!${none}"
-                echo ""
+                printf "$yellow -------------------------------------$none \n"
+                printf "$green Compress success!$none \n"
+                printf "$yellow -------------------------------------$none \n"
                 continue
             elif [ -f $1/${name} ]; then
                 pass2clip
                 eval zip -e "$1/${name%.*}".zip "$1/$name"
-                echo "${green}Compress success!${none}"
-                echo ""
+                printf "$yellow -------------------------------------$none \n"
+                printf "$green Compress success!$none \n"
+                printf "$yellow -------------------------------------$none \n"
                 continue
             else
-                echo ""
-                echo "${red}******************************************${none}"
-                echo "${red}Something wrong happened when compressing.${none}"
-                echo "${red}******************************************${none}"
-                echo ""
+                printf "\n$red ******************************************$none \n"
+                printf "\n$red Something wrong happened when compressing.$none \n"
+                printf "\n$red ******************************************$none \n"
             fi
             ;;
         2)
-            echo "${yellow}-------------------------------------${none}"
-            printf "${green}Possible password:${none} ${red}%s${none}\n" "${name%.*}"
-            echo "${yellow}-------------------------------------${none}"
+            printf "$yellow -------------------------------------$none \n"
+            printf "$green Possible password:$none  $red %s$none \n" "${name%.*}"
+            printf "$yellow -------------------------------------$none \n"
             if [ -f $1/${name} ]; then
                 pass2clip
                 unzip "$1/${name%.*}".zip
                 continue
             else
-                echo ""
-                echo "${red}*****************************************${none}"
-                echo "${red}Something wrong happened when decrypting.${none}"
-                echo "${red}*****************************************${none}"
-                echo ""
+                printf "\n$red ******************************************$none \n"
+                printf "\n$red Something wrong happened when compressing.$none \n"
+                printf "\n$red ******************************************$none \n"
             fi
             ;;
         q)
