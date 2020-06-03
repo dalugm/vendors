@@ -6,12 +6,13 @@
 # Last Upated:
 #          By:
 # Keywords: pyenv, install
-# Version: 0.1
+# Version: 0.2
 # Changelog:
 #     0.1 - initial version
+#     0.2 - add multi version support
 # Commentary:
 
-# install python version in qucik mirrors
+# install python version in quick mirrors
 
 # Usage:
 
@@ -19,6 +20,18 @@
 
 # Code:
 
-v=${1}
-wget https://npm.taobao.org/mirrors/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/
-pyenv install $v 
+red='\033[31m'
+green='\033[32m'
+yellow='\033[33m'
+none='\033[0m'
+
+if [ -z "$1" ] ; then
+    echo -e "$red No parameters detected. $none"
+    echo -e "$green usage:$none$yellow ./$0 <python_version> $none"
+    exit 1;
+fi
+
+for v in "$@"; do
+    wget https://npm.taobao.org/mirrors/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/
+    pyenv install $v
+done
