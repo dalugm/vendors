@@ -9,6 +9,7 @@
 # Version: 0.1
 # Changelog:
 #     0.1 - initial version
+#     0.2 - add arguments
 # Commentary:
 
 # convert cwd multi videos to gifs
@@ -16,26 +17,22 @@
 # Code:
 
 
-red='\033[31m'
-green='\033[32m'
-yellow='\033[33m'
-none='\033[0m'
-
 cmd=$(which ffmpeg) # ffmpeg path
-suffix="$1"         # video suffix
 
 if [ -z $cmd ]; then
     echo "FFmpeg not installed."
     exit 1
 fi
 
-printf "$green Please input video format: $none"
-
-read -r ch
-suffix=$ch
+read -p "Input video format: " suffix
+read -p "Input frame rate (the bigger the more fluent): " rate
 
 
 for file in $(ls *.$suffix)
 do
-    $cmd -i $file -vf scale=iw/2:ih/2 -b:v 2400k -r 8 -an "${file%.*}.gif"
+    if [ "$1" == "-c" ]; then
+        $cmd -i $file -vf scale=iw/2:ih/2 -b:v 2400k -r "$rate" -an "${file%.*}.gif"
+    else
+        $cmd -i $file -b:v 2400k -r "$rate" -an "${file%.*}.gif"
+    fi
 done
