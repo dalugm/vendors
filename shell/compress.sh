@@ -40,7 +40,7 @@ do
     case $ch in
         1)
             printf "$yellow -------------------------------------$none \n"
-            printf "$green Default pasword:$none  $red %s$none \n" "${name%.*}"
+            printf "$green Default password:$none  $red %s$none \n" "${name%.*}"
             printf "$yellow -------------------------------------$none \n"
             if [ -d $1/${name} ]; then
                 pass2clip
