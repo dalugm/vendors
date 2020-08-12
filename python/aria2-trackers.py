@@ -48,6 +48,7 @@ def change_trackers(text):
 
         while "" in s:
             s.remove("")
+
         string += ",".join(s)
 
         for line in alllines:
@@ -66,5 +67,8 @@ def change_trackers(text):
 
 
 URL = "https://ngosang.github.io/trackerslist/trackers_best_ip.txt"
-TEXT = get_html(URL)
-change_trackers(TEXT)
+try:
+    TEXT = get_html(URL)
+    change_trackers(TEXT)
+except:
+    print("{0}something wrong happened...{1}".format(red, green))
