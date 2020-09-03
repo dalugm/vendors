@@ -1,7 +1,35 @@
 # Introduction
 
-## Delete files
+## terminfo-xterm-24bits.src
 
+`tic -x -o ~/.terminfo terminfo-xterm-24bits.src`
+
+Then we can use true color (24-bits) in terminal.
+
+``` shell
+$ TERM=xterm-24bits
+```
+
+NOTE: The princinple is listed below
+
+```
+- Local (OS)
+    |
+    + Terminal (support 24bits color)
+        |
+        + Shell --------------.
+            |                 |
+            + Remote          | set same terminfo
+                |             |
+                + Shell ------'
+                    |
+                    + Tmux
+                        |
+                        + Software
+```
+
+
+## Delete files
 均支持正则表达
 
 - 第一种做法

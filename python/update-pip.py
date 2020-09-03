@@ -11,8 +11,7 @@ from subprocess import call
 
 for dist in get_installed_distributions():
     print("%s" %(dist.project_name))
-print "----------"
 
 for dist in get_installed_distributions():
-    print "updating:%s" %(dist.project_name), "\t"
+    print "\n----- updating: [ %s" %(dist.project_name), "] -----\t\n"
     call("pip install --user --upgrade " + dist.project_name, shell=True)

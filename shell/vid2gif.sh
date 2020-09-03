@@ -19,20 +19,20 @@
 
 cmd=$(which ffmpeg) # ffmpeg path
 
-if [ -z $cmd ]; then
-    echo "FFmpeg not installed."
+if [ -z "$cmd" ]; then
+    echo "ffmpeg not installed."
     exit 1
 fi
 
-read -p "Input video format: " suffix
-read -p "Input frame rate (the bigger the more fluent): " rate
+read -r -p "Input video format: " suffix
+read -r -p "Input frame rate (the bigger the more fluent): " rate
 
 
-for file in $(ls *.$suffix)
+for file in $(ls ./*."$suffix")
 do
     if [ "$1" == "-c" ]; then
-        $cmd -i $file -vf scale=iw/2:ih/2 -b:v 2400k -r "$rate" -an "${file%.*}.gif"
+        $cmd -i "$file" -vf scale=iw/2:ih/2 -r "$rate" -an "${file%.*}.gif"
     else
-        $cmd -i $file -b:v 2400k -r "$rate" -an "${file%.*}.gif"
+        $cmd -i "$file" -r "$rate" -an "${file%.*}.gif"
     fi
 done

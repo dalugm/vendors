@@ -10,8 +10,7 @@ from pip._internal.utils.misc import get_installed_distributions
 
 for dist in get_installed_distributions():
     print(dist.project_name)
-print("----------")
 
 for dist in get_installed_distributions():
-    print("updating:", dist.project_name, "\t")
+    print("\n----- updating: [ ", dist.project_name, " ] -----\t\n")
     call("pip3 install --user --upgrade " + dist.project_name, shell=True)
