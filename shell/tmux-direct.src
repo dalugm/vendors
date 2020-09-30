@@ -1,0 +1,2 @@
+tmux-direct|tmux with direct-color indexing,
+        use=xterm+direct, use=tmux,

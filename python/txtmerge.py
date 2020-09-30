@@ -29,8 +29,8 @@ else:
 for file in os.listdir(INPUT_DIR):
 
     try:
-        file = open(os.path.join(INPUT_DIR, file), 'r', \
-                          encoding=ENCODE)
+        file = open(os.path.join(INPUT_DIR, file), 'r',
+                    encoding=ENCODE)
         text = file.read()
 
         # make sure there's a line at the end of file
