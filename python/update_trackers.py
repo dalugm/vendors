@@ -26,7 +26,7 @@ def get_text(url):
         r.raise_for_status()
         r.encoding = "utf-8"
         return r.text
-    except:
+    except Exception:
         print("{0}Timed Out.{1}".format(red, none))
         return ""
 
@@ -66,7 +66,7 @@ def change_aria2_trackers(text):
         file.close()
 
         print("{0}Trackers Updated.{1}".format(green, none))
-    except:
+    except Exception:
         print("{0}Update Failed.{1}".format(red, none))
 
 
@@ -89,24 +89,28 @@ def get_url(str):
 
 
 parser = argparse.ArgumentParser(description='Update BT-Trackers')
-parser.add_argument('-u', '--url', metavar='',
+parser.add_argument('-s', '--source', metavar='',
                     default=['XIU2_BEST'], nargs='*',
                     help='website to update bt-trackers')
-parser.add_argument('-p', '--print',
-                    action='store_true',
-                    help='print trackers')
+
+group = parser.add_mutually_exclusive_group()
+group.add_argument('-u', '--update',
+                   action='store_true',
+                   help='update aria2 trackers')
+group.add_argument('-p', '--print',
+                   action='store_true',
+                   help='print trackers')
+
 args = parser.parse_args()
 
-try:
+for s in args.source:
+    url = get_url(s)
+    text = get_text(url)
+    if args.print:
+        print('\n' + text)
     var = ''
-    for u in args.url:
-        url = get_url(u)
-        text = get_text(url)
-        trackers = aria2_format_trackers(text)
-        var += trackers + ','
-        if args.print:
-            print(text)
+    trackers = aria2_format_trackers(text)
+    var += trackers + ','
+if args.update:
     trackers = var[:-1]
     change_aria2_trackers(trackers)
-except:
-    print("{0}Execute Function Unsuccessfully.{1}".format(red, green))
