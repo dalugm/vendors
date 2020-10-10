@@ -3,7 +3,6 @@
 
 import re
 import os
-import sys
 import argparse
 import requests
 
@@ -103,14 +102,14 @@ group.add_argument('-p', '--print',
 
 args = parser.parse_args()
 
+var = ''
 for s in args.source:
     url = get_url(s)
     text = get_text(url)
-    if args.print:
-        print('\n' + text)
-    var = ''
     trackers = aria2_format_trackers(text)
     var += trackers + ','
+if args.print:
+    print(var.replace(',', '\n\n'))
 if args.update:
     trackers = var[:-1]
     change_aria2_trackers(trackers)
