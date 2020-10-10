@@ -6,6 +6,8 @@ Put [script](trackers-list-aria2.sh) under `/koolshare/aria2` and chmod file to
 
 ## terminfo-xterm-24bits.src
 
+Add a new TERM type to send 24-bit colors to the terminal.
+
 `tic -x -o ~/.terminfo terminfo-xterm-24bits.src`
 
 Then we can use true color (24-bits) in terminal.
@@ -32,6 +34,13 @@ NOTE: The princinple is listed below
                         + Software
 ```
 
+EXAMPLE:
+
+When using Emacs, you can run this to enable direct color mode in terminal after
+Emacs 26.1 ([related
+commit](https://github.com/emacs-mirror/emacs/commit/e463e5762bbe628be3d15da066a90f079a8468b3)):
+
+`$ TERM=xterm-24bits emacs -nw`
 
 ## Delete files
 均支持正则表达
