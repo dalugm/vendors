@@ -1,4 +1,8 @@
 # Introduction
+## Aria2 auto update
+
+Put [script](trackers-list-aria2.sh) under `/koolshare/aria2` and chmod file to
+0755. Then put [this](cru.sh) under `/jffs/scripts` to update automatically.
 
 ## terminfo-xterm-24bits.src
 
