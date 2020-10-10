@@ -80,6 +80,37 @@ all hooks after it are ignored.")
   (setq buffer-face-mode-face 'width-font-face)
   (buffer-face-mode))
 
+;; make IME compatible with evil-mode
+(defun my/evil-toggle-input-method ()
+  "When input method is on, go to `evil-insert-state'.
+Quit `evil-insert-state' when input method is off."
+  (interactive)
+  (cond
+    ;; evil-mode
+    ((and (boundp 'evil-mode) evil-mode)
+      (cond
+        ((eq evil-state 'insert)
+          (toggle-input-method))
+        (t
+          (evil-insert-state)
+          (unless current-input-method
+            (toggle-input-method))))
+      (cond
+        (current-input-method
+          (evil-insert-state)
+          (message "IME on!"))
+        (t
+          (message "IME off!"))))
+    ;; NOT evil-mode
+    (t
+      (toggle-input-method))))
+
+(defun my//evil-insert-state-hack (orig-func &rest args)
+  "Notify user IME status by applying ORIG-FUNC with ARGS."
+  (apply orig-func args)
+  (if current-input-method (message "IME on!")))
+(advice-add 'evil-insert-state :around #'my//evil-insert-state-hack)
+
 (provide 'misc-funcs)
 
 ;;; misc-funcs.el ends here
