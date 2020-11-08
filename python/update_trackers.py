@@ -87,17 +87,15 @@ def get_url(str):
     return URL_DICT[str]
 
 
-parser = argparse.ArgumentParser(description='Update BT-Trackers')
-parser.add_argument('-s', '--source', metavar='',
-                    default=['XIU2_BEST'], nargs='*',
-                    help='website to update bt-trackers')
+parser = argparse.ArgumentParser(description='Update BT-Trackers',
+                                 add_help=True)
+parser.add_argument('-s', '--source', default=['XIU2_BEST'], nargs='*',
+                    help='NGOSANG_(BEST/ALL)[_IP] XIU2_(BEST/ALL/HTTP)')
 
 group = parser.add_mutually_exclusive_group()
-group.add_argument('-u', '--update',
-                   action='store_true',
+group.add_argument('-u', '--update', action='store_true',
                    help='update aria2 trackers')
-group.add_argument('-p', '--print',
-                   action='store_true',
+group.add_argument('-p', '--print', action='store_true',
                    help='print trackers')
 
 args = parser.parse_args()

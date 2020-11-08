@@ -43,6 +43,7 @@ commit](https://github.com/emacs-mirror/emacs/commit/e463e5762bbe628be3d15da066a
 `$ TERM=xterm-24bits emacs -nw`
 
 ## Delete files
+
 均支持正则表达
 
 - 第一种做法
@@ -55,7 +56,7 @@ find . -name '<name>' -type f -delete
 - 第二种做法
 
 ```sh
-find ./ -regex "<name>" -print -exec rm -fr {};
+find ./ -regex "<name>" -print -exec rm -rf {};
 ```
 
 其中`{}`是`find`命令查找出来的所有结果

@@ -29,9 +29,9 @@ do
 
     name=${name// /\\ }
 
-    printf "$green 1.$none $red Zip folder/file with password $none\n"
-    printf "$green 2.$none $red Decrypted zip file $none \n"
-    printf "$green q.$none $red Exit$none \n"
+    printf "$green 1.$none $red Compress $none\n"
+    printf "$green 2.$none $red Decompress $none \n"
+    printf "$green q.$none $red Exit $none \n"
     printf "$yellow -------------------------------------$none \n"
     printf "$green     Press anykey to continue...     $none \n"
     printf "$yellow -------------------------------------$none \n"
