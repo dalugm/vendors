@@ -1,4 +1,5 @@
 # Introduction
+
 ## Aria2 auto update
 
 Put [script](trackers-list-aria2.sh) under `/koolshare/aria2` and chmod file to
@@ -37,8 +38,7 @@ NOTE: The princinple is listed below
 EXAMPLE:
 
 When using Emacs, you can run this to enable direct color mode in terminal after
-Emacs 26.1 ([related
-commit](https://github.com/emacs-mirror/emacs/commit/e463e5762bbe628be3d15da066a90f079a8468b3)):
+Emacs 26.1 ([related commit]):
 
 `$ TERM=xterm-24bits emacs -nw`
 
@@ -74,3 +74,5 @@ bash compress.sh <path>
 - 解压时会将压缩文件解压到当前的工作目录下。
 
 - 文件部分语法不符合规范
+
+[related commit]: https://github.com/emacs-mirror/emacs/commit/e463e5762bbe628be3d15da066a90f079a8468b3

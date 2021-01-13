@@ -90,6 +90,28 @@
 (display-time) ; show date in mode-line
 ;; }}
 
+;; 执行速度较慢
+;; ----- `my--mode-line-buffer-identification' -------------
+;; more informative than `buffer-id'
+(defvar my--mode-line-buffer-identification
+  (list
+    '(:eval (when (buffer-modified-p)
+              (propertize "[" 'face nil 'help-echo nil)))
+    '(:eval (propertize "%b"
+              ;; was this buffer modified since the last save?
+              'face (cond
+                      ((buffer-modified-p)
+                        '(error mode-line-buffer-id))
+                      (t
+                        'nil))
+              'help-echo buffer-file-name))
+    '(:eval (when (buffer-modified-p)
+              (concat "]" (propertize "*"
+                            'face nil
+                            'help-echo "Bufer has been modified"))))
+    '(:eval (buffer-read-only (:propertize " RO " face warning))))
+  "More informative than `buffer-id'.")
+(put 'my--mode-line-buffer-identification 'risky-local-variable t)
 (provide 'init-modeline)
 
 ;;; init-modeline.el ends here
