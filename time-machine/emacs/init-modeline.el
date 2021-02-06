@@ -112,6 +112,7 @@
     '(:eval (buffer-read-only (:propertize " RO " face warning))))
   "More informative than `buffer-id'.")
 (put 'my--mode-line-buffer-identification 'risky-local-variable t)
+
 (provide 'init-modeline)
 
 ;;; init-modeline.el ends here

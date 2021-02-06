@@ -15,6 +15,56 @@
 ;;; Segments
 ;;
 
+;; ----- `my--mode-line-bar' -------------------------------
+;; TODO: redisplay modeline since the height may cover buffer content
+
+(defvar my--mode-line-height 30
+  "ModeLine's height.  Only respected in GUI.")
+
+(defvar my--mode-line-bar-width (if (eq system-type 'darwin) 3 6)
+  "Modeline's bar width.  Only respected in GUI.")
+
+(defun my//make-xpm (color width height)
+  "Create an XPM bitmap via COLOR, WIDTH and HEIGHT.
+Inspired by `powerline''s `pl/make-xpm'."
+  (when (and (display-graphic-p) (image-type-available-p 'xpm))
+    (propertize
+      " " 'display
+      (let ((data (make-list height (make-list width 1)))
+            (color (or color "None")))
+        (ignore-errors
+          (create-image
+            (concat
+              (format "/* XPM */\nstatic char * percent[] = {\n\"%i %i 2 1\",\n\". c %s\",\n\"  c %s\","
+                (length (car data)) (length data) color color)
+              (apply #'concat
+                (cl-loop with idx = 0
+                         with len = (length data)
+                         for dl in data
+                         do (cl-incf idx)
+                         collect
+                         (concat "\""
+                           (cl-loop for d in dl
+                                    if (= d 0) collect (string-to-char " ")
+                                    else collect (string-to-char "."))
+                           (if (eq idx len) "\"};" "\",\n")))))
+            'xpm t :ascent 'center))))))
+
+(defvar my--mode-line-bar
+  (my//make-xpm nil my--mode-line-bar-width (max my--mode-line-height (frame-char-height))))
+
+(defun my//refresh-mode-line (&optional width height)
+  "Refresh modeline bars with `WIDTH' and `HEIGHT'."
+  (let ((re-width (max (prefix-numeric-value width) my--mode-line-bar-width))
+        (re-height (max (max (prefix-numeric-value height) my--mode-line-height) (frame-char-height))))
+    (when (and (numberp re-width) (numberp re-height))
+      (setq my--mode-line-bar (my//make-xpm nil re-width re-height)))))
+
+(add-hook 'after-setting-font-hook #'my//refresh-mode-line)
+(add-hook 'window-configuration-change-hook #'my//refresh-mode-line)
+
+(put 'my--mode-line-bar 'risky-local-variable t)
+
 ;; ----- `my--mode-line-modes' ---------------------------------
 (defvar my--mode-line-modes ; remove minor modes
   '(:eval
@@ -142,6 +192,7 @@
 
 (setq-default mode-line-format
   '(""
+     my--mode-line-bar
      my--mode-line-format-left
      (:eval
        (propertize
