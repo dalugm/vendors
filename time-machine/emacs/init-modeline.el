@@ -7,6 +7,24 @@
 
 ;;; Code:
 
+;; modeline indicator, bundle with `evil'
+(defconst my-default-color (cons (face-background 'mode-line)
+                             (face-foreground 'mode-line))
+  "Default mode-line color.")
+(defun my//show-current-state ()
+  "Change mode line color to notify user evil current state."
+  (let ((color (cond
+                 ((minibufferp)          my-default-color)
+                 ((evil-emacs-state-p)   '("#7e1671" . "#f8f4ed"))
+                 ((evil-insert-state-p)  '("#20894d" . "#f8f4ed"))
+                 ((evil-visual-state-p)  '("#ffd111" . "#f8f4ed"))
+                 ((evil-replace-state-p) '("#de1c31" . "#f8f4ed"))
+                 ((buffer-modified-p)    '("#1772b4" . "#f8f4ed"))
+                 (t                      my-default-color))))
+    (set-face-background 'mode-line (car color))
+    (set-face-foreground 'mode-line (cdr color))))
+(add-hook 'post-command-hook #'my//show-current-state)
+
 ;; @see http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html
 ;; But I need global-mode-string,
 ;; @see http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_360.html

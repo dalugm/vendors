@@ -5,16 +5,16 @@
 Put [script](trackers-list-aria2.sh) under `/koolshare/aria2` and chmod file to
 0755. Then put [this](cru.sh) under `/jffs/scripts` to update automatically.
 
-## terminfo-xterm-24bits.src
+## xterm-24bit.terminfo
 
 Add a new TERM type to send 24-bit colors to the terminal.
 
-`tic -x -o ~/.terminfo terminfo-xterm-24bits.src`
+`/usr/bin/tic -x -o ~/.terminfo xterm-24bit.terminfo`
 
-Then we can use true color (24-bits) in terminal.
+Then we can use true color (24-bit) in terminal.
 
 ``` shell
-$ TERM=xterm-24bits
+$ TERM=xterm-24bit
 ```
 
 NOTE: The princinple is listed below
@@ -22,12 +22,12 @@ NOTE: The princinple is listed below
 ```
 - Local (OS)
     |
-    + Terminal (support 24bits color)
+    + Terminal (support 24bit color)
         |
         + Shell --------------.
-            |                 |
+            |                                |
             + Remote          | set same terminfo
-                |             |
+                |                        |
                 + Shell ------'
                     |
                     + Tmux
@@ -40,7 +40,34 @@ EXAMPLE:
 When using Emacs, you can run this to enable direct color mode in terminal after
 Emacs 26.1 ([related commit]):
 
-`$ TERM=xterm-24bits emacs -nw`
+`$ TERM=xterm-24bit emacs -nw`
+
+Now you can set your $TERM variable to xterm-24bit:
+
+``` sh
+export TERM=xterm-24bit
+```
+
+SSH might break if your remote machine does not have the same setup, you can work around this with the following alias.
+
+``` sh
+alias ssh="TERM=xterm-256color ssh"
+```
+
+If you use tmux, you need to make sure you installed a version with truecolor support, then add the following lines to your .tmux.conf:
+
+``` sh
+set -g default-terminal "xterm-24bit"
+set -g terminal-overrides ',xterm-24bit:Tc'
+```
+
+Also, make sure you have utf8 language variables if you want all characters to display correctly. For example:
+
+``` sh
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+```
 
 ## Delete files
 
