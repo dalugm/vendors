@@ -80,6 +80,63 @@ all hooks after it are ignored.")
   (setq buffer-face-mode-face 'width-font-face)
   (buffer-face-mode))
 
+(defvar my-font nil
+  "Used to cache configuration across sessions.")
+
+(defvar my-font-alist
+  '(
+     (sarasa-mono-slab-sc-16 . (:family "Sarasa Mono Slab SC" :size 16))
+     (sarasa-mono-sc-16      . (:family "Sarasa Mono SC" :size 16))
+     (sarasa-gothic-sc-16    . (:family "Sarasa Gothic SC" :size 16))
+     (sarasa-ui-sc-16        . (:family "Sarasa UI SC" :size 16))
+     (gnu-unifont-16         . (:family "Unifont" :size 16))
+     (sourcecodepro-nerd-14  . (:family "SauceCodePro Nerd Font" :size 14))
+     (wenquanyi-16           . (:family "WenQuanYi Zen Hei Mono" :size 16))
+     (firacode-nerd-14       . (:family "FiraCode Nerd Font" :size 14))
+     (hack-nerd-14           . (:family "Hack Nerd Font" :size 14))
+     (monaco-14              . (:family "Monaco" :size 14))
+     (sf-mono-14             . (:family "SF Mono" :size 14))
+     (source-han-sans-sc-16  . (:family "Source Han Sans SC" :size 16))
+     (source-han-sans-tc-16  . (:family "Source Han Sans TC" :size 16))
+     (source-han-serif-sc-16 . (:family "Source Han Serif SC" :size 16))
+     (source-han-serif-tc-16 . (:family "Source Han Serif TC" :size 16))
+     )
+  "An alist of all the fonts you can switch between by `my/load-font'.
+Key is a symbol as the name, value is a plist specifying the font spec.
+More info about spec in `font-spec'.")
+
+;; `buffer-face-mode' version
+(defun my/load-buffer-font-1 (&optional font-name)
+  "Prompt for a FONT-NAME and set it for current buffer.
+Fonts are specified in `my-font-alist'."
+  (interactive (list
+                 (completing-read "Choose a font for current buffer: "
+                   (mapcar #'car my-font-alist))))
+  (let* ((font-name (or font-name my-font))
+         (font (apply #'font-spec
+                 (if font-name
+                     (alist-get (intern font-name) my-font-alist
+                       nil nil #'equal)
+                   (cdar my-font-alist)))))
+    (setq buffer-face-mode-face `(:font ,font :height ,(* 10 (font-get `,font ':size))))
+    (buffer-face-mode +1)))
+
+;; `face-remapping-alist' version
+(defun my/load-buffer-font-2 (&optional font-name)
+  "Prompt for a FONT-NAME and set it for current buffer.
+Fonts are specified in `my-font-alist'."
+  (interactive (list
+                 (completing-read "Choose a font for current buffer: "
+                   (mapcar #'car my-font-alist))))
+  (let* ((font-name (or font-name my-font))
+         (font (apply #'font-spec
+                 (if font-name
+                     (alist-get (intern font-name) my-font-alist
+                       nil nil #'equal)
+                   (cdar my-font-alist)))))
+    (set (make-local-variable 'face-remapping-alist)
+      (copy-tree `((default :font ,font :height ,(* 10 (font-get `,font ':size))))))))
+
 ;; make IME compatible with evil-mode
 (defun my/evil-toggle-input-method ()
   "When input method is on, go to `evil-insert-state'.
