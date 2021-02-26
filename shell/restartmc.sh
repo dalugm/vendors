@@ -38,9 +38,10 @@ if [ -n "$PID" ]; then
         # 重新检查服务端进程还在不在
         PID=$(screen -ls | grep -E '[0-9]+\.[[:alnum:]]+' | grep "$MC_PROCESS" | awk -F'.' '{print $1}')
         # 判断服务端 screen 进程是否为空，如果为空则切换到服务端所在的目
-        # 录并执行 start.sh 启动服务端，然后结束 while 循环
+        # 录并备份当前世界，然后执行 start.sh 启动服务端，结束 while 循环
         if [ -z "$PID" ]; then
             cd ${MC_PATH}
+            tar -zcvf ~/backups/world_$(date +%Y-%m-%d).tar.gz world
             bash start.sh
             break
         else
@@ -66,9 +67,10 @@ if [ -n "$PID" ]; then
                 fi
                 # 强制杀掉进程一般是瞬间完成的，所以在强制杀掉进程后休眠
                 # 3 秒（保险起见至少设置 1 秒，理论上不设置也行）便可以
-                # 切换到服务端根目录启动服务器端
+                # 切换到服务端根目录，备份世界并启动服务端
                 sleep 3
                 cd ${MC_PATH}
+                tar -zcvf ~/backups/world_$(date +%Y-%m-%d).tar.gz world
                 bash start.sh
                 break
             fi
