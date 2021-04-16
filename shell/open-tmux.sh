@@ -1,4 +1,4 @@
-# !/usr/bin/env bash
+#!/usr/bin/env bash
 # Filename: open-tmux.sh
 # Author: Xu Xiaodong <xxdlhy@gmail.com>
 # Maintainer: dalu <mou.tong@qq.com>
@@ -20,18 +20,18 @@
 cmd=$(which tmux)      # tmux path
 session="$1"           # session name
 
-if [ -z $cmd ]; then
+if [ -z "$cmd" ]; then
     echo "Tmux not installed."
     exit 1
 fi
 
-if [ -z $session ]; then
+if [ -z "$session" ]; then
     session=0
 fi
 
 $cmd has-session -t $session 2> /dev/null
 
-if [ $? -ne 0 ]; then
+if [ "$?" -ne 0 ]; then
     $cmd new-session -s $session -n daily -d
     $cmd send-keys -t $session:1 'cd ~' C-m C-l
 
