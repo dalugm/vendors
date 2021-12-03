@@ -18,7 +18,7 @@ pass2clip()
     elif [ "$(uname)" = "Linux" ]; then
         echo "${name%.*}" | xsel --clipboard
     else
-        echo "This file can't recognize your system..."
+        echo "Cannot recognize your system..."
     fi
 }
 

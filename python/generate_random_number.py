@@ -20,4 +20,7 @@ while True:
     number = input("Input the number of random numbers: ")
 
     for day in range(int(number)):
-        print(normal_random() * float(variance) + float(medium))
+        result = normal_random() * float(variance) + float(medium)
+        print(result)
+        # 保留三位有效数字
+        print("{:.3g}".format(result))
