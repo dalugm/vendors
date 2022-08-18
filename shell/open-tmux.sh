@@ -36,7 +36,7 @@ if [ "$?" -ne 0 ]; then
     $cmd send-keys -t $session:1 'cd ~' C-m C-l
 
     $cmd new-window -t $session:2 -n edit -d
-    $cmd send-keys -t $session:2 'cd ~/Downloads' C-m C-l
+    $cmd send-keys -t $session:2 'cd ~' C-m C-l
 
     $cmd new-window -t $session:3 -n program -d
     $cmd send-keys -t $session:3 'cd ~/src' C-m C-l
@@ -47,13 +47,13 @@ if [ "$?" -ne 0 ]; then
     $cmd send-keys -t $session:3.2 'cd ~' C-m C-l
 
     $cmd new-window -t $session:4 -d -n emacs
-    $cmd send-keys -t $session:4 'cd ~/.emacs.d; emacs' C-m
+    $cmd send-keys -t $session:4 'cd ~/.emacs.d; emacs -nw' C-m
 
     $cmd new-window -t $session:5 -d -n update
     $cmd send-keys -t $session:5 'cd ~' C-m C-l
 
     $cmd new-window -t $session:6 -d -n aria2
-    $cmd send-keys -t $session:6 'cd ~/.aria2; aria2c' C-m
+    $cmd send-keys -t $session:6 'cd ~/.aria2 && aria2c' C-m
 
 fi
 
