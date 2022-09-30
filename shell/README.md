@@ -25,9 +25,9 @@ NOTE: The princinple is listed below
     + Terminal (support 24bit color)
         |
         + Shell --------------.
-            |                                |
+            |                 |
             + Remote          | set same terminfo
-                |                        |
+                |             |
                 + Shell ------'
                     |
                     + Tmux

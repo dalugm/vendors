@@ -168,6 +168,18 @@ Quit `evil-insert-state' when input method is off."
   (if current-input-method (message "IME on!")))
 (advice-add 'evil-insert-state :around #'my//evil-insert-state-hack)
 
+(defun my--add-auto-mode (mode &rest patterns)
+  "Add entries to `auto-mode-alist'.
+Use specified MODE for all given file PATTERNS."
+  (dolist (pattern patterns)
+    (add-to-list 'auto-mode-alist (cons pattern mode))))
+
+(defun my--add-interpreter-mode (mode &rest patterns)
+  "Add entries to `interpreter-mode-alist'.
+Use specified MODE for all given file PATTERNS."
+  (dolist (pattern patterns)
+    (add-to-list 'interpreter-mode-alist (cons pattern mode))))
+
 (provide 'misc-funcs)
 
 ;;; misc-funcs.el ends here
