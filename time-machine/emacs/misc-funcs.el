@@ -180,6 +180,43 @@ Use specified MODE for all given file PATTERNS."
   (dolist (pattern patterns)
     (add-to-list 'interpreter-mode-alist (cons pattern mode))))
 
+(defun my--calculate-time-duration (start end)
+  "Calculate seconds (format: SS) duration from START to END (format: \"HH:MM:SS\")."
+  (-
+   (let ((end-sum 0) (end-acc 0))
+     (mapc
+      (lambda (x)
+        (if (and (<= (- x ?0) 9) (>= (- x ?0) 0))
+            (setq end-acc (+ (* 10 end-acc) (- x ?0)))
+          (setq end-sum (+ (* end-sum 60) end-acc)
+                end-acc 0)))
+      end)
+     (setq end-sum (+ (* end-sum 60) end-acc))
+     end-sum)
+   (let ((start-sum 0)
+         (start-acc 0))
+     (mapc
+      (lambda (x)
+        (if (and (<= (- x ?0) 9) (>= (- x ?0) 0))
+            (setq start-acc (+ (* 10 start-acc) (- x ?0)))
+          (setq start-sum (+ (* start-sum 60) start-acc)
+                start-acc 0)))
+      start)
+     (setq start-sum (+ (* start-sum 60) start-acc))
+     start-sum)))
+
+(defun my--convert-second-to-time-format (second)
+  "Convert input SECOND(SS) to time format(\"HH:MM:SS\")."
+  (let (time)
+    (dotimes (_ 2)
+      (setq time (concat (format ":%02d" (% second 60)) time)
+            second (/ second 60)))
+    (setq time
+          (concat
+           (format "%02d" second)
+           time))
+    time))
+
 (provide 'misc-funcs)
 
 ;;; misc-funcs.el ends here
