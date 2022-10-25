@@ -1,0 +1,14 @@
+## Generate world
+world=~/.local/share/Terraria/Worlds/<world>.wld
+worldpath=~/.local/share/Terraria/Worlds
+# world size: 1(small) 2(medium) 3(large)
+# Creates a new world if none is found
+autocreate=3
+# world difficulty when using -autocreate: 0(normal), 1(expert), 2(master), 3(journey)
+difficulty=1
+worldname=
+motd=
+maxplayers=8
+port=7777
+password=
+banlist=banlist.txt

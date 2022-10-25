@@ -31,6 +31,6 @@ if [ -z "$1" ] ; then
 fi
 
 for v in "$@"; do
-    wget https://cache.ruby-china.com/pub/ruby/${v%.*}/ruby-$v.tar.bz2 -P ~/.rbenv/cache/
-    rbenv install $v
+    wget https://cache.ruby-china.com/pub/ruby/"${v%.*}"/ruby-"$v".tar.gz -P ~/.rbenv/cache/
+    rbenv install "$v"
 done

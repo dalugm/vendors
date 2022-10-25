@@ -32,6 +32,6 @@ if [ -z "$1" ] ; then
 fi
 
 for v in "$@"; do
-    wget https://npm.taobao.org/mirrors/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/
+    wget https://cdn.npmmirror.com/binaries/python/$v/Python-$v.tar.gz -P ~/.pyenv/cache/
     pyenv install $v
 done
