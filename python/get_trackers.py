@@ -4,10 +4,10 @@
 import re
 import os
 import argparse
-import requests
+from urllib import request
 
 """
-python3 update_trackers.py
+python get_trackers.py
 """
 
 red = "\033[31m"
@@ -21,12 +21,11 @@ def get_text(url):
     get html text
     """
     try:
-        r = requests.get(url, timeout=30)
-        r.raise_for_status()
-        r.encoding = "utf-8"
-        return r.text
+        res = request.urlopen(url)
+        return res.read().decode("utf-8")
     except Exception:
         print("{0}Timed Out.{1}".format(red, none))
+        print(Exception)
         return ""
 
 
@@ -74,6 +73,7 @@ def change_aria2_trackers(text, path):
         print("{0}Trackers Updated.{1}".format(green, none))
     except Exception:
         print("{0}Update Failed.{1}".format(red, none))
+        print(Exception)
 
 
 URL_DICT = {
@@ -100,14 +100,14 @@ parser.add_argument(
     "--source",
     default=["XIU2_BEST"],
     nargs="*",
-    help="NGOSANG_{BEST,ALL}[_IP] XIU2_{BEST,ALL,HTTP}",
+    help="NGOSANG_{BEST,ALL}[_IP] XIU2_{BEST,ALL,HTTP}, default 'XIU2_BEST'",
 )
 parser.add_argument(
     "-ua",
     "--update-aria2",
     const="home",
     nargs="?",
-    help="update aria2 trackers, $HOME/.aria2/aria2.conf default",
+    help="where to update aria2 trackers, default '$HOME/.aria2/aria2.conf'",
 )
 parser.add_argument(
     "-p", "--print", action="store_true", help="print trackers to console"
@@ -116,6 +116,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 var = ""
+
 for s in args.source:
     url = get_url(s)
     text = get_text(url)
