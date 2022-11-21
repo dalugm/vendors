@@ -1,7 +1,0 @@
-* Introduction
-
-** Usage
-
-*** aria2 trackers (WIP):
-
-: python3 aria2-trackers.py --help

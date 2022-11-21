@@ -1,0 +1,101 @@
+* Introduction
+
+** Aria2 auto update
+
+Put [[file://trackers-list-aria2.sh][trackers-list-aria2]] under ~/koolshare/aria2~ and ~chmod~ file to
+~0755~. Then put [[file://cru.sh][cru.sh]] under ~/jffs/scripts~ to update automatically.
+
+** xterm-24bit.terminfo
+
+Add a new ~TERM~ type to send 24-bit colors to the terminal.
+
+: /usr/bin/tic -x -o ~/.terminfo xterm-24bit.terminfo
+
+Then we can use true color (24-bit) in terminal.
+
+: $ TERM=xterm-24bit
+
+*NOTE:* The princinple is listed below
+
+#+begin_example
+- Local (OS)
+    |
+    + Terminal (support 24bit color)
+        |
+        + Shell --------------.
+            |                 |
+            + Remote          | set same terminfo
+                |             |
+                + Shell ------'
+                    |
+                    + Tmux
+                        |
+                        + Software
+#+end_example
+
+*** EXAMPLE
+
+When using Emacs, you can run this to enable direct color mode in
+terminal after Emacs 26.1 ([[https://github.com/emacs-mirror/emacs/commit/e463e5762bbe628be3d15da066a90f079a8468b3][related commit]]):
+
+: $ TERM=xterm-24bit emacs -nw
+
+Now you can set your ~$TERM~ variable to ~xterm-24bit~:
+
+: export TERM=xterm-24bit
+
+SSH might break if your remote machine does not have the same setup, you
+can work around this with the following alias.
+
+: alias ssh="TERM=xterm-256color ssh"
+
+If you use tmux, you need to make sure you installed a version with
+truecolor support, then add the following lines to your ~.tmux.conf~:
+
+#+begin_src sh
+  set -g default-terminal "xterm-24bit"
+  set -g terminal-overrides ',xterm-24bit:Tc'
+#+end_src
+
+Also, make sure you have utf8 language variables if you want all
+characters to display correctly. For example:
+
+#+begin_src sh
+  export LC_ALL=en_US.UTF-8
+  export LANG=en_US.UTF-8
+  export LANGUAGE=en_US.UTF-8
+#+end_src
+
+** Delete files
+
+均支持正则表达
+
+- 第一种做法
+
+  #+begin_src sh
+    find . -depth -name "<name>" -print0 | xargs -0 rm
+    find . -name '<name>' -type f -delete
+  #+end_src
+
+- 第二种做法
+
+  #+begin_src sh
+    find ./ -regex "<name>" -print -exec rm -rf {};
+  #+end_src
+
+其中 ~{}~ 是 ~find~ 命令查找出来的所有结果
+
+** Compress files (WIP)
+
+#+begin_src sh
+  bash compress.sh <path>
+#+end_src
+
+目前存在的问题：
+
+- 只支持 ~bash~​，使用 ~./~​（​~POSIX sh~​）执行时压缩名字中带空格的文件会报
+  错
+
+- 解压时会将压缩文件解压到当前的工作目录下
+
+- 文件部分语法不符合规范
