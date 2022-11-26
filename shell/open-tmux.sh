@@ -47,13 +47,16 @@ if [ "$?" -ne 0 ]; then
     $cmd send-keys -t $session:3.2 'cd ~' C-m C-l
 
     $cmd new-window -t $session:4 -d -n emacs
-    $cmd send-keys -t $session:4 'cd ~/.emacs.d; emacs -nw' C-m
+    $cmd send-keys -t $session:4 'cd ~/.emacs.d' C-m
 
     $cmd new-window -t $session:5 -d -n update
     $cmd send-keys -t $session:5 'cd ~' C-m C-l
 
     $cmd new-window -t $session:6 -d -n aria2
-    $cmd send-keys -t $session:6 'cd ~/.aria2 && aria2c' C-m
+    $cmd send-keys -t $session:6 'cd ~/.aria2' C-m
+
+    $cmd new-window -t $session:7 -d -n proxy
+    $cmd send-keys -t $session:7 'cd ~/tools' C-m
 
 fi
 
