@@ -47,7 +47,7 @@ if [ "$?" -ne 0 ]; then
     $cmd send-keys -t $session:3.2 'cd ~' C-m C-l
 
     $cmd new-window -t $session:4 -d -n emacs
-    $cmd send-keys -t $session:4 'cd ~/.emacs.d' C-m C-l
+    $cmd send-keys -t $session:4 'cd ~' C-m C-l
 
     $cmd new-window -t $session:5 -d -n update
     $cmd send-keys -t $session:5 'cd ~' C-m C-l
