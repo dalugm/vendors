@@ -128,7 +128,7 @@ export function divide(...nums) {
   const num2Changed = float2Fixed(num2);
   checkBoundary(num1Changed);
   checkBoundary(num2Changed);
-  // 重要，这里必须用strip进行修正
+  // 重要，这里必须用 strip 进行修正
   return times(num1Changed / num2Changed, strip(Math.pow(10, digitLength(num2) - digitLength(num1))));
 }
 
@@ -142,7 +142,7 @@ export function round(num, ratio) {
   if (num < 0 && result !== 0) {
     result = times(result, -1);
   }
-  // 位数不足则补0
+  // 位数不足则补 0
   return result;
 }
 
@@ -164,4 +164,3 @@ export default {
   round,
   enableBoundaryChecking,
 };
-

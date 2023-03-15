@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
+    "target": "ESNext",
     "removeComments": false,
     "preserveConstEnums": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
@@ -15,11 +14,11 @@
     "sourceMap": true,
     "baseUrl": ".",
     "rootDir": ".",
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "allowJs": true,
     "resolveJsonModule": true,
-    "typeRoots": [
-      "node_modules/@types"
+    "type": [
+      "@types/node"
     ]
   },
   "include": ["./src", "global.d.ts"],
