@@ -22,4 +22,20 @@ const throttle: TimeoutFn = <T>(fn: T, wait: number) => {
   };
 };
 
-export { debounce, throttle };
+type Func<T extends any[], R> = (...args: T) => R;
+
+const curry = <T extends any[], R>(fn: Func<T, R>): Func<T, R> => {
+  const arity = fn.length;
+
+  return function curried(...args: any[]): any {
+    if (args.length >= arity) {
+      return fn.apply(this, args);
+    } else {
+      return (...nextArgs: any[]) => {
+        return curried.apply(this, args.concat(nextArgs));
+      };
+    }
+  } as Func<T, R>;
+};
+
+export { curry, debounce, throttle };

@@ -15,5 +15,6 @@ function arrayGroupBy(list, groupId) {
 }
 
 // ES6
-[...new Set(items.map(elem => elem.field))].forEach(elem =>
-  this.storeArray.push(items.filter(item => item.field === elem)))
+[...new Set(items.map((elem) => elem.field))].forEach((elem) =>
+  this.storeArray.push(items.filter((item) => item.field === elem))
+);

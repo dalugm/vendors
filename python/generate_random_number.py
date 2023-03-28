@@ -1,6 +1,6 @@
-'''
+"""
 generate random numbers following normal distribution.
-'''
+"""
 import random
 import math
 
@@ -11,7 +11,7 @@ def normal_random():
     """
     y_1 = y_2 = random.random()
 
-    return math.cos(2 * 3.14 * y_2) * math.sqrt(-2. * math.log(y_1))
+    return math.cos(2 * 3.14 * y_2) * math.sqrt(-2.0 * math.log(y_1))
 
 
 while True:

@@ -17,7 +17,7 @@ function strip(num, precision = 15) {
 function digitLength(num) {
   // Get digit length of e
   const eSplit = num.toString().split(/[eE]/);
-  const len = (eSplit[0].split('.')[1] || '').length - +(eSplit[1] || 0);
+  const len = (eSplit[0].split(".")[1] || "").length - +(eSplit[1] || 0);
   return len > 0 ? len : 0;
 }
 
@@ -27,8 +27,8 @@ function digitLength(num) {
  * @param {*number} num 输入数
  */
 function float2Fixed(num) {
-  if (num.toString().indexOf('e') === -1) {
-    return Number(num.toString().replace('.', ''));
+  if (num.toString().indexOf("e") === -1) {
+    return Number(num.toString().replace(".", ""));
   }
   const dLen = digitLength(num);
   return dLen > 0 ? strip(Number(num) * Math.pow(10, dLen)) : Number(num);
@@ -129,7 +129,10 @@ export function divide(...nums) {
   checkBoundary(num1Changed);
   checkBoundary(num2Changed);
   // 重要，这里必须用 strip 进行修正
-  return times(num1Changed / num2Changed, strip(Math.pow(10, digitLength(num2) - digitLength(num1))));
+  return times(
+    num1Changed / num2Changed,
+    strip(Math.pow(10, digitLength(num2) - digitLength(num1))),
+  );
 }
 
 /**
@@ -154,7 +157,6 @@ export function round(num, ratio) {
 export function enableBoundaryChecking(flag = true) {
   _boundaryCheckingState = flag;
 }
-
 
 export default {
   times,

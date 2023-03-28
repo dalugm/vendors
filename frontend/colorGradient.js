@@ -26,12 +26,11 @@ function colorGradient(
   for (let i = 0; i < step; i++) {
     // 计算每一步的 hex 值
     let hex = rgbToHex(
-      `rgb(${Math.round(sR * i + startR)},${Math.round(sG * i + startG)},${
+      `rgb(${Math.round(sR * i + startR)},${
         Math.round(
-          sB *
-              i + startB,
+          sG * i + startG,
         )
-      })`,
+      },${Math.round(sB * i + startB)})`,
     );
     // 确保第一个颜色值为 startColor 的值
     if (i === 0) hex = rgbToHex(startColor);

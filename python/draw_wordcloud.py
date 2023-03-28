@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''
+"""
 usage: txtmerge.py <text> <font> <stopwords> <userdict> [bg_image]
-'''
+"""
 
 from __future__ import print_function
 
@@ -12,8 +12,9 @@ import jieba.analyse
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
-assert len(sys.argv) >= 2, \
-    "\nUsage: draw_wordcloud.py <text> <font> <stopwords> <userdict> \
+assert (
+    len(sys.argv) >= 2
+), "\nUsage: draw_wordcloud.py <text> <font> <stopwords> <userdict> \
 [bg_image](can be omitted)"
 
 
@@ -24,7 +25,7 @@ jieba.load_userdict(str(sys.argv[4]))
 if len(sys.argv) == 6:
     bg_image_path = str(sys.argv[5])
 else:
-    bg_image_path = ''
+    bg_image_path = ""
 
 
 def clean_using_stopword(text):
@@ -39,11 +40,11 @@ def clean_using_stopword(text):
     liststr = "/ ".join(seg_list)
     with open(stopwords_path) as f_stop:
         f_stop_text = f_stop.read()
-        f_stop_seg_list = f_stop_text.split('\n')
-    for myword in liststr.split('/'):  # 去除停顿词，生成新文档
+        f_stop_seg_list = f_stop_text.split("\n")
+    for myword in liststr.split("/"):  # 去除停顿词，生成新文档
         if not (myword.strip() in f_stop_seg_list) and len(myword.strip()) > 1:
             mywordlist.append(myword)
-    return ''.join(mywordlist)
+    return "".join(mywordlist)
 
 
 def preprocessing():
@@ -74,20 +75,22 @@ def extract_keywords():
 
 
 if len(bg_image_path) > 0:
+
     def draw_wordcloud():
         """
         生成词云。1.配置WordCloud。2.plt进行显示
         :return:
         """
         back_coloring = plt.imread(bg_image_path)
-        wc = WordCloud(font_path=font_path,      # 设置字体
-                       background_color="white",  # 背景颜色
-                       max_words=2000,           # 词云显示的最大词数
-                       mask=back_coloring,        # 填充图
-                       scale=2,
-                       width=1680,
-                       height=1050,
-                       )
+        wc = WordCloud(
+            font_path=font_path,  # 设置字体
+            background_color="white",  # 背景颜色
+            max_words=2000,  # 词云显示的最大词数
+            mask=back_coloring,  # 填充图
+            scale=2,
+            width=1680,
+            height=1050,
+        )
         # 根据频率生成词云
         wc.generate_from_frequencies(extract_keywords())
         # 显示图片
@@ -97,19 +100,22 @@ if len(bg_image_path) > 0:
         plt.show()
         # 保存到本地
         wc.to_file("wordcloud.jpg")
+
 else:
+
     def draw_wordcloud():
         """
         生成词云。1.配置WordCloud。2.plt进行显示
         :return:
         """
-        wc = WordCloud(font_path=font_path,      # 设置字体
-                       background_color="white",  # 背景颜色
-                       max_words=2000,           # 词云显示的最大词数
-                       scale=2,
-                       width=1680,
-                       height=1050,
-                       )
+        wc = WordCloud(
+            font_path=font_path,  # 设置字体
+            background_color="white",  # 背景颜色
+            max_words=2000,  # 词云显示的最大词数
+            scale=2,
+            width=1680,
+            height=1050,
+        )
         # 根据频率生成词云
         wc.generate_from_frequencies(extract_keywords())
         # 显示图片
@@ -121,5 +127,5 @@ else:
         wc.to_file("wordcloud.jpg")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     draw_wordcloud()
