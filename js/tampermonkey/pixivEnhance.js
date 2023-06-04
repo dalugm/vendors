@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Enhance
 // @namespace    someone
-// @version      0.1.0
+// @version      0.1.1
 // @description  Enhance for pixiv
 // @match        https://www.pixiv.net/novel/show.php?id=*
 // @icon         https://www.google.com/s2/favicons?domain=pixiv.net
@@ -38,13 +38,15 @@ const processText = ($) => {
     .appendTo("h1")
     .css("margin", "4px 0");
 
-  const parent = $(".text-count").parent();
+  const parent = $("#gtm-novel-work-scroll-begin-reading").parent();
+  // const parent = $(".text-count").parent();
   if (!!parent.length) {
     const text = parent[0].innerText;
     addButton(text, "复制全文（保留换行符）");
   }
 
-  const text = $(".text-count").parent().text();
+  const text = $("#gtm-novel-work-scroll-begin-reading").parent().text();
+  // const text = $(".text-count").parent().text();
   if (!!text) {
     addButton(text, "复制全文（纯文本）");
   }

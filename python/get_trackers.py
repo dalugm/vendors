@@ -18,7 +18,7 @@ none = "\033[0m"
 
 def get_text(url):
     """
-    get html text
+    Get html text.
     """
     try:
         res = request.urlopen(url)
