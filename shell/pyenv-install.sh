@@ -8,11 +8,12 @@
 # Keywords: pyenv, install
 # Version: 0.2
 # Changelog:
-#     0.1 - initial version
-#     0.2 - add multi version support
+#     0.1 - Initial version
+#     0.2 - Add multi version support
+#     0.3 - Replace wget with curl
 # Commentary:
 
-# install python version in quick mirrors
+# Install python version in quick mirrors
 
 # Usage:
 
@@ -32,6 +33,7 @@ if [ -z "$1" ] ; then
 fi
 
 for v in "$@"; do
-    wget https://cdn.npmmirror.com/binaries/python/$v/Python-$v.tar.gz -P ~/.pyenv/cache/
-    pyenv install $v
+    curl "https://repo.huaweicloud.com/python/$v/Python-$v.tar.xz" \
+         -o "$HOME/.pyenv/cache/Python-$v.tar.xz"
+    pyenv install "$v"
 done

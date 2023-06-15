@@ -8,10 +8,11 @@
 # Keywords: rbenv, install
 # Version: 0.2
 # Changelog:
-#     0.1 - initial version
+#     0.1 - Initial version
+#     0.2 - Replace wget with curl
 # Commentary:
 
-# install ruby version in quick mirrors
+# Install ruby version in quick mirrors.
 
 # Usage:
 
@@ -31,6 +32,7 @@ if [ -z "$1" ] ; then
 fi
 
 for v in "$@"; do
-    wget https://cache.ruby-china.com/pub/ruby/"${v%.*}"/ruby-"$v".tar.gz -P ~/.rbenv/cache/
+    curl "https://cache.ruby-china.com/pub/ruby/${v%.*}/ruby-$v.tar.gz" \
+         -o "$HOME/.rbenv/cache/ruby-$v.tar.gz"
     rbenv install "$v"
 done
