@@ -1,5 +1,5 @@
 """
-generate random numbers following normal distribution.
+Generate random numbers following normal distribution.
 """
 import random
 import math
@@ -22,5 +22,5 @@ while True:
     for day in range(int(number)):
         result = normal_random() * float(variance) + float(medium)
         print(result)
-        # 保留三位有效数字
-        print("{:.3g}".format(result))
+        # 保留三位有效数字。
+        print(f"{result:.3g}")

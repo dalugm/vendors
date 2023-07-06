@@ -24,7 +24,7 @@ def get_text(url):
         res = request.urlopen(url)
         return res.read().decode("utf-8")
     except Exception:
-        print("{0}Timed Out.{1}".format(red, none))
+        print(f"{red}Timed Out.{none}")
         print(Exception)
         return ""
 
@@ -70,9 +70,9 @@ def change_aria2_trackers(text, path):
 
         file.close()
 
-        print("{0}Trackers Updated.{1}".format(green, none))
+        print(f"{green}Trackers Updated.{none}")
     except Exception:
-        print("{0}Update Failed.{1}".format(red, none))
+        print(f"{red}Update Failed.{none}")
         print(Exception)
 
 
