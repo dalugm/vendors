@@ -1365,6 +1365,39 @@
 .h-5_6 {
   height: 83.333333%;
 }
+.h-1_12 {
+  height: 8.333333%;
+}
+.h-2_12 {
+  height: 16.333333%;
+}
+.h-3_12 {
+  height: 25%;
+}
+.h-4_12 {
+  height: 33.333333%;
+}
+.h-5_12 {
+  height: 41.666667%;
+}
+.h-6_12 {
+  height: 50%;
+}
+.h-7_12 {
+  height: 58.333333%;
+}
+.h-8_12 {
+  height: 66.666667%;
+}
+.h-9_12 {
+  height: 75%;
+}
+.h-10_12 {
+  height: 83.333333%;
+}
+.h-11_12 {
+  height: 91.666667%;
+}
 .h-full {
   height: 100%;
 }
@@ -2394,6 +2427,31 @@
 /* Backgrounds */
 /***************/
 
+/* Background Attachment */
+.bg-fixed {
+  background-attachment: fixed;
+}
+.bg-local {
+  background-attachment: local;
+}
+.bg-scroll {
+  background-attachment: scroll;
+}
+
+/* Background Clip */
+.bg-clip-border {
+  background-clip: border-box;
+}
+.bg-clip-padding {
+  background-clip: padding-box;
+}
+.bg-clip-content {
+  background-clip: content-box;
+}
+.bg-clip-text {
+  background-clip: text;
+}
+
 /* Background Color */
 .bg-inherit {
   background-color: inherit;
@@ -3081,6 +3139,77 @@
 }
 .bg-zinc-900 {
   background-color: rgb(24, 24, 27);
+}
+
+/* Background Origin */
+.bg-origin-border {
+  background-origin: border-box;
+}
+.bg-origin-padding {
+  background-origin: padding-box;
+}
+.bg-origin-content {
+  background-origin: content-box;
+}
+
+/* Background Position */
+.bg-bottom {
+  background-position: bottom;
+}
+.bg-center {
+  background-position: center;
+}
+.bg-left {
+  background-position: left;
+}
+.bg-left-bottom {
+  background-position: left bottom;
+}
+.bg-left-top {
+  background-position: left top;
+}
+.bg-right {
+  background-position: right;
+}
+.bg-right-bottom {
+  background-position: right bottom;
+}
+.bg-right-top {
+  background-position: right top;
+}
+.bg-top {
+  background-position: top;
+}
+
+/* Background Repeat */
+.bg-repeat {
+  background-repeat: repeat;
+}
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+.bg-repeat-x {
+  background-repeat: repeat-x;
+}
+.bg-repeat-y {
+  background-repeat: repeat-y;
+}
+.bg-repeat-round {
+  background-repeat: round;
+}
+.bg-repeat-space {
+  background-repeat: space;
+}
+
+/* Background Size */
+.bg-auto {
+  background-size: auto;
+}
+.bg-cover {
+  background-size: cover;
+}
+.bg-contain {
+  background-size: contain;
 }
 
 /***********/
