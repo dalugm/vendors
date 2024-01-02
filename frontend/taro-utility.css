@@ -1,6 +1,15 @@
-/**********/
 /* Layout */
-/**********/
+
+/* Aspect Ratio */
+.aspect-auto {
+  aspect-ratio: auto;
+}
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
 
 /* Display */
 .block {
@@ -295,9 +304,8 @@
   z-index: 2;
 }
 
-/******************/
+
 /* Flexbox & Grid */
-/******************/
 
 /* Flex Basis */
 .basis-0 {
@@ -831,9 +839,8 @@
   align-items: stretch;
 }
 
-/***********/
+
 /* Spacing */
-/***********/
 
 /* Padding */
 .p-0 {
@@ -1147,9 +1154,8 @@
   margin-left: 30px;
 }
 
-/**********/
+
 /* Sizing */
-/**********/
 
 /* Width */
 .w-inherit {
@@ -1241,6 +1247,24 @@
 }
 .w-screen {
   width: 100vw;
+}
+.w-svw {
+  width: 100svw;
+}
+.w-lvw {
+  width: 100lvw;
+}
+.w-dvw {
+  width: 100dvw;
+}
+.w-svh {
+  width: 100svh;
+}
+.w-lvh {
+  width: 100lvh;
+}
+.w-dvh {
+  width: 100dvh;
 }
 .w-min {
   width: min-content;
@@ -1572,6 +1596,24 @@
 .h-screen {
   height: 100vh;
 }
+.h-svh {
+  height: 100svh;
+}
+.h-lvh {
+  height: 100lvh;
+}
+.h-dvh {
+  height: 100dvh;
+}
+.h-svw {
+  height: 100svw;
+}
+.h-lvw {
+  height: 100lvw;
+}
+.h-dvw {
+  height: 100dvw;
+}
 .h-min {
   height: min-content;
 }
@@ -1765,9 +1807,8 @@
   height: 240px;
 }
 
-/**************/
+
 /* Typography */
-/**************/
 
 /* Font Style */
 .italic {
@@ -2681,9 +2722,8 @@
   content: none;
 }
 
-/***************/
+
 /* Backgrounds */
-/***************/
 
 /* Background Attachment */
 .bg-fixed {
@@ -3470,9 +3510,8 @@
   background-size: contain;
 }
 
-/***********/
+
 /* Borders */
-/***********/
 
 /* Border Radius */
 .rounded-none {
@@ -4171,9 +4210,8 @@
   border-style: none;
 }
 
-/***********/
+
 /* Effects */
-/***********/
 
 /* Box Shadow */
 .shadow-sm {
@@ -4256,9 +4294,8 @@
   opacity: 1;
 }
 
-/***************************/
+
 /* Transitions & Animation */
-/***************************/
 
 /* Animation */
 .animate-none {
@@ -4316,9 +4353,8 @@
   }
 }
 
-/**************/
+
 /* Transforms */
-/**************/
 
 /* Scale */
 .scale-0 {
