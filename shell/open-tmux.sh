@@ -17,8 +17,8 @@
 
 # Code:
 
-cmd=$(which tmux)      # tmux path
-session="$1"           # session name
+cmd=$(which tmux) # tmux path
+session="$1"      # session name
 
 if [ -z "$cmd" ]; then
     echo "Tmux not installed."
@@ -29,7 +29,7 @@ if [ -z "$session" ]; then
     session=0
 fi
 
-$cmd has-session -t $session 2> /dev/null
+$cmd has-session -t $session 2>/dev/null
 
 if [ "$?" -ne 0 ]; then
     $cmd new-session -s $session -n daily -d
@@ -39,7 +39,7 @@ if [ "$?" -ne 0 ]; then
     $cmd send-keys -t $session:2 'cd ~/projs' C-m C-l
 
     $cmd new-window -t $session:3 -n program -d
-    $cmd send-keys -t $session:3 'cd ~/src' C-m C-l
+    $cmd send-keys -t $session:3 'cd ~' C-m C-l
     $cmd split-window -v -t $session:3
     $cmd select-layout -t $session:3 main-horizontal
     # select default tmux layout instead
@@ -52,12 +52,8 @@ if [ "$?" -ne 0 ]; then
     $cmd new-window -t $session:5 -d -n update
     $cmd send-keys -t $session:5 'cd ~' C-m C-l
 
-    $cmd new-window -t $session:6 -d -n aria2
-    $cmd send-keys -t $session:6 'cd ~/.aria2' C-m C-l
-
-    $cmd new-window -t $session:7 -d -n proxy
-    $cmd send-keys -t $session:7 'cd ~/tools' C-m C-l
-
+    $cmd new-window -t $session:6 -d -n proxy
+    $cmd send-keys -t $session:6 'cd ~/tools' C-m C-l
 fi
 
 $cmd attach-session -t $session
