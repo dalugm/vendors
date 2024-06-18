@@ -8,15 +8,15 @@ autoload -Uz vcs_info
 # FIRST #
 #########
 
-# %F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}]%f
+# %F{magenta}(%f%s%F{magenta})%F{yellow}-%F{magenta}[%F{green}%b%F{yellow}]%f
 # becomes (%s)-[%b] if you ignore the colors.
 # The %s gets replaced by the vc system (e.g. git)
 # And the %b gets replaced by the current branch. 
 zstyle ':vcs_info:*' actionformats \
-    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+    '%F{magenta}(%f%s%F{magenta})%F{yellow}-%F{magenta}[%F{green}%b%F{3}|%F{1}%a%F{magenta}]%f '
 zstyle ':vcs_info:*' formats       \
-    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+    '%F{magenta}(%f%s%F{magenta})%F{yellow}-%F{magenta}[%F{green}%b%F{magenta}]%f '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{yellow}%r'
 zstyle ':vcs_info:*' enable git cvs svn
 
 # or use precmd, see man zshcontrib

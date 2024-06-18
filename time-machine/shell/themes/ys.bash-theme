@@ -1,0 +1,40 @@
+#!/usr/env/bin bash
+# Clean, simple, compatible and meaningful.
+# Tested on Linux, Unix and Windows under ANSI colors.
+# It is recommended to use with a dark background.
+# Colors: black, red, green, yellow, *blue, magenta, cyan, and white.
+#
+# Based on ys-theme, 18 September 2020
+
+#
+# Sets the prompt statement variables.
+# shellcheck disable=SC2034
+#
+set_prompts() {
+
+    # Set the terminal title.
+    #   user@hostname: ~
+    PS1='\[\033]0;\u@\h: \w\007\]'
+
+    # Set the default interactive prompt.
+    # # user @ hostname in ~ on git:master ox?$
+    # $ ...
+    PS1+=$'\n'
+    PS1+="${bold_blue}# ${reset}${cyan}\u ${reset}@ ${green}\h "
+    PS1+="${gray}in ${bold_yellow}\w "
+    PS1+="${reset}\$(__git_prompt_info ' ${purple}' '')"
+    PS1+=$'\n'
+    PS1+="${bold_red}\\$ "
+    PS1+="${reset}"
+
+    # Set the continuation interactive prompt.
+    # -> ...
+    PS2="${gray}-> "
+    PS2+="${reset}"
+
+    export PS1
+    export PS2
+}
+
+set_prompts
+unset -f set_prompts

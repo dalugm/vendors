@@ -1,0 +1,35 @@
+#!/usr/env/bin bash
+
+#
+# Sets the prompt statement variables.
+# shellcheck disable=SC2034
+#
+set_prompts() {
+
+    # Set the terminal title.
+    #   user@hostname: ~
+    PS1='\[\033]0;\u@\h: \w\007\]'
+
+    # Set the default interactive prompt.
+    #   user@hostname: ~ [master +!?$]
+    #   $ ...
+    PS1+=$'\n'
+    PS1+="${green}\u@\h"
+    PS1+="${gray}: "
+    PS1+="${blue}\w"
+    PS1+="\$(__git_prompt_info ' ${purple}[' ']')"
+    PS1+=$'\n'
+    PS1+="${gray}λ "
+    PS1+="${reset}"
+
+    # Set the continuation interactive prompt.
+    # -> ...
+    PS2="${gray}-> "
+    PS2+="${reset}"
+
+    export PS1
+    export PS2
+}
+
+set_prompts
+unset -f set_prompts
