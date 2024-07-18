@@ -3,6 +3,11 @@
 " Description: 
 " Last Modified: May 01, 2020
 
+" Let 'tl' toggle between this and the last accessed tab
+let b:lasttab = 1
+nmap <Leader>tl :exe "tabn ".b:lasttab<CR>
+au TabLeave * let b:lasttab = tabpagenr()
+
 function! DeleteTillSlash()
     let g:cmd = getcmdline()
 
