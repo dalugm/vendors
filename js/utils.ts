@@ -1,9 +1,9 @@
-type ReturnFn = (args?: any[]) => void;
+type ReturnFn = (...args: any) => void;
 type TimeoutFn = <T>(fn: T, wait: number) => ReturnFn;
 
 const debounce: TimeoutFn = <T>(fn: T, wait: number) => {
   let timer: NodeJS.Timeout | undefined;
-  return (...args: any[]) => {
+  return (...args: any) => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       typeof fn === "function" && fn(...args);
@@ -13,7 +13,7 @@ const debounce: TimeoutFn = <T>(fn: T, wait: number) => {
 
 const throttle: TimeoutFn = <T>(fn: T, wait: number) => {
   let timer: NodeJS.Timeout | undefined;
-  return (...args: any[]): void => {
+  return (...args: any): void => {
     if (timer) return;
     timer = setTimeout(() => {
       typeof fn === "function" && fn(...args);
