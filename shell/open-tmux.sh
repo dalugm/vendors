@@ -36,7 +36,7 @@ if [ "$?" -ne 0 ]; then
     $cmd send-keys -t $session:6 'cd ~/Downloads' C-m C-l
 
     $cmd new-window -t $session:7 -d -n update -d
-    $cmd send-keys -t $session:7 'cd ~/dotfiles; all_proxy' C-m C-l
+    $cmd send-keys -t $session:7 'cd ~/dotfiles' C-m C-l
 
     $cmd new-window -t $session:8 -d -n tools
     $cmd send-keys -t $session:8 'cd ~/tools' C-m C-l
