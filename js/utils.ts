@@ -1,32 +1,34 @@
-type ReturnFn = (...args: any) => void;
-type TimeoutFn = <T>(fn: T, wait: number) => ReturnFn;
+type callbackFn = (args?: unknown[]) => void;
+type TimeoutFn<T extends callbackFn = callbackFn> = (
+  callback: T,
+  delay: number,
+) => (...args: Parameters<typeof callback>) => void;
 
-const debounce: TimeoutFn = <T>(fn: T, wait: number) => {
-  let timer: NodeJS.Timeout | undefined;
-  return (...args: any) => {
+const debounce: TimeoutFn = (callback, delay) => {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  return (...args) => {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      typeof fn === "function" && fn(...args);
-    }, wait);
+      typeof callback === "function" && callback(...args);
+    }, delay);
   };
 };
 
-const throttle: TimeoutFn = <T>(fn: T, wait: number) => {
-  let timer: NodeJS.Timeout | undefined;
-  return (...args: any): void => {
+const throttle: TimeoutFn = (callback, delay) => {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  return (...args): void => {
     if (timer) return;
     timer = setTimeout(() => {
-      typeof fn === "function" && fn(...args);
+      typeof callback === "function" && callback(...args);
       timer = undefined;
-    }, wait);
+    }, delay);
   };
 };
 
-type Func<T extends any[], R> = (...args: T) => R;
+type Fn<T extends unknown[], R> = (...args: T) => R;
 
-const curry = <T extends any[], R>(fn: Func<T, R>): Func<T, R> => {
+const curry = <T extends unknown[], R>(fn: Fn<T, R>): Fn<T, R> => {
   const arity = fn.length;
-
   return function curried(...args: any[]): any {
     if (args.length >= arity) {
       return fn.apply(this, args);
@@ -35,7 +37,7 @@ const curry = <T extends any[], R>(fn: Func<T, R>): Func<T, R> => {
         return curried.apply(this, args.concat(nextArgs));
       };
     }
-  } as Func<T, R>;
+  } as Fn<T, R>;
 };
 
 export { curry, debounce, throttle };
