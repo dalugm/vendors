@@ -4,7 +4,7 @@ type TimeoutFn<T extends callbackFn = callbackFn> = (
   delay: number,
 ) => (...args: Parameters<typeof callback>) => void;
 
-const debounce: TimeoutFn = (callback, delay) => {
+export const debounce: TimeoutFn = (callback, delay) => {
   let timer: ReturnType<typeof setTimeout> | undefined;
   return (...args) => {
     clearTimeout(timer);
@@ -14,7 +14,7 @@ const debounce: TimeoutFn = (callback, delay) => {
   };
 };
 
-const throttle: TimeoutFn = (callback, delay) => {
+export const throttle: TimeoutFn = (callback, delay) => {
   let timer: ReturnType<typeof setTimeout> | undefined;
   return (...args): void => {
     if (timer) return;
@@ -24,20 +24,3 @@ const throttle: TimeoutFn = (callback, delay) => {
     }, delay);
   };
 };
-
-type Fn<T extends unknown[], R> = (...args: T) => R;
-
-const curry = <T extends unknown[], R>(fn: Fn<T, R>): Fn<T, R> => {
-  const arity = fn.length;
-  return function curried(...args: any[]): any {
-    if (args.length >= arity) {
-      return fn.apply(this, args);
-    } else {
-      return (...nextArgs: any[]) => {
-        return curried.apply(this, args.concat(nextArgs));
-      };
-    }
-  } as Fn<T, R>;
-};
-
-export { curry, debounce, throttle };

@@ -1,7 +1,7 @@
 const url = "https://sample.example.file";
 const authHeader = "Bearer **************";
 
-const options = {
+const options: RequestInit = {
   headers: {
     Authorization: authHeader,
   },
@@ -10,6 +10,6 @@ const options = {
 fetch(url, options)
   .then((res) => res.blob())
   .then((blob) => {
-    let file = window.URL.createObjectURL(blob);
+    const file = window.URL.createObjectURL(blob);
     window.location.assign(file);
   });
